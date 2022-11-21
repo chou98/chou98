@@ -1,0 +1,182 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local userId = player.UserId
+local thumbType = Enum.ThumbnailType.HeadShot
+local thumbSize = Enum.ThumbnailSize.Size420x420
+local content, isReady = Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
+game:GetService("StarterGui"):SetCore("SendNotification",{  
+Title = "BLACKTRAP",     
+Text = "Wellcome to BlackTap",
+Icon = "rbxassetid://8666601749",
+Duration = 10,
+Color = Success
+})
+game:GetService("StarterGui"):SetCore("SendNotification",{  
+Title = "Hello",     
+Text = player.Name,
+Icon = content,
+Duration = 10,
+Color = Info
+})
+
+if game.CoreGui:FindFirstChild("BlackTrap") then
+    game.CoreGui:FindFirstChild("BlackTrap"):Destroy()
+end
+
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+
+local Blacklib = {}
+if game.CoreGui:FindFirstChild("Board") then
+    game.CoreGui:FindFirstChild("Board"):Destroy()
+end
+
+function Blacklib:Window(gametitle)
+    local osfunc = {}
+    local osfunc2 = {}
+    local titlefunc = {}    
+    local mintoggle = false
+    local Points = Instance.new("Frame")
+    local BlackTrap = Instance.new("ScreenGui")
+    local Shadow = Instance.new("ImageLabel")
+    local WindowFrame = Instance.new("Frame")
+    local WindowCorner = Instance.new("UICorner")
+    local BlackImage = Instance.new("ImageLabel")
+    local BlackTitle = Instance.new("TextLabel")
+    local Space = Instance.new("TextLabel")
+    local GameTitle = Instance.new("TextLabel")
+    local ServerTime =
+Instance.new("TextButton")
+    local ServerDate = Instance.new("TextButton")
+    
+    -- Propertiers --
+    BlackTrap.Name = "BlackTrap"
+    BlackTrap.Parent = game.CoreGui
+    BlackTrap.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    
+    Points.Name = "Points"
+    Points.Parent = BlackTrap
+    Points.BackgroundColor3 = _G.WindowBackgroundColor
+    Points.BackgroundTransparency = 1.000
+    Points.Size = UDim2.new(0, 800, 0, 600)
+    Points.Position = UDim2.new(0, 320, 0, 90)
+    
+    Shadow.Name = "Shadow"
+    Shadow.Parent = Points
+    Shadow.AnchorPoint = Vector2.new(0.5, 0.5)
+    Shadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Shadow.BackgroundTransparency = 1.000
+    Shadow.Position = UDim2.new(0, 295, 0, 170)
+    Shadow.Size = UDim2.new(0, 0, 0, 0)
+    Shadow.Image = "http://www.roblox.com/asset/?id=6105530152"
+    Shadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+    Shadow.ClipsDescendants = true
+
+Shadow:TweenSize(UDim2.new(0, 650, 0, 450), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .6, true)
+    
+    WindowFrame.Name = "WindowFrame"
+    WindowFrame.Parent = Shadow
+    WindowFrame.BackgroundColor3 = _G.WindowBackgroundColor
+    WindowFrame.Position = UDim2.new(0, 32, 0, 37)
+    WindowFrame.BorderSizePixel = 0
+    WindowFrame.Size = UDim2.new(0, 589, 0, 378)
+    WindowFrame.ClipsDescendants = true
+    
+    WindowCorner.Name = "WindowCorner"
+    WindowCorner.Parent = WindowFrame
+    WindowCorner.CornerRadius = UDim.new(0, 5)
+    
+    BlackImage.Name = "BlackImage"
+    BlackImage.Parent = WindowFrame
+    BlackImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    BlackImage.BackgroundTransparency = 1.000
+    BlackImage.Position = UDim2.new(0, 5, 0, 7)
+    BlackImage.Size = UDim2.new(0, 25, 0, 25)
+    BlackImage.Image = "rbxassetid://8666601749"
+    BlackImage.ImageColor3 = _G.ImageColor
+
+BlackTitle.Name = "BlackTitle"
+    BlackTitle.Parent = WindowFrame
+    BlackTitle.BackgroundColor3 = _G.WindowBackgroundColor
+    BlackTitle.BackgroundTransparency = 1.000
+    BlackTitle.Position = UDim2.new(0, 33, 0, 7)
+    BlackTitle.Size = UDim2.new(0, 50, 0, 25)
+    BlackTitle.Font = Enum.Font.GothamBold
+    BlackTitle.Text = ""
+    BlackTitle.TextColor3 = _G.TitleTextColor
+    BlackTitle.TextSize = 15.000
+    BlackTitle.TextXAlignment = Enum.TextXAlignment.Left
+    
+    Space.Name = "Space"
+    Space.Parent = WindowFrame
+    Space.BackgroundColor3 = _G.WindowBackgroundColor
+    Space.BackgroundTransparency = 1.000
+    Space.Position = UDim2.new(0, 102, 0, 7)
+    Space.Size = UDim2.new(0, 10, 0, 25)
+    Space.Font = Enum.Font.GothamBold
+    Space.Text = "|"
+    Space.TextColor3 = Color3.fromRGB(150, 0, 0)
+    Space.TextSize = 18.000
+    
+    GameTitle.Name = gametitle or "GameTitle"
+    GameTitle.Parent = WindowFrame
+    GameTitle.BackgroundColor3 = _G.WindowBackgroundColor
+    GameTitle.BackgroundTransparency = 1.000
+    GameTitle.Position = UDim2.new(0, 114, 0, 7)
+    GameTitle.Size = UDim2.new(0, 100, 0, 25)
+    GameTitle.Font = Enum.Font.GothamSemibold
+    GameTitle.Text = gametitle
+    GameTitle.TextColor3 = _G.TitleTextColor
+    GameTitle.TextSize = 15.000
+    GameTitle.TextXAlignment = Enum.TextXAlignment.Left
+
+MinButton.Name = "MinButton"
+    MinButton.Parent = WindowFrame
+    MinButton.BackgroundColor3 = _G.WindowBackgroundColor
+    MinButton.BackgroundTransparency = 1.000
+    MinButton.AutoButtonColor = false
+    MinButton.Position = UDim2.new(0, 535, 0, 7)
+    MinButton.Size = UDim2.new(0, 25, 0, 25)
+    MinButton.Font = Enum.Font.GothamSemibold
+    MinButton.TextColor3 = Color3.fromRGB(150, 150, 150)
+    MinButton.Text = "-"
+    MinButton.TextSize = 35.000
+    
+    CloseButton.Name = "CloseButton"
+    CloseButton.Parent = WindowFrame
+    CloseButton.BackgroundColor3 = _G.WindowBackgroundColor
+    CloseButton.BackgroundTransparency = 1.000
+    CloseButton.AutoButtonColor = false
+    CloseButton.Position = UDim2.new(0, 560, 0, 7)
+    CloseButton.Size = UDim2.new(0, 25, 0, 25)
+    CloseButton.Font = Enum.Font.GothamSemibold
+    CloseButton.TextColor3 = Color3.fromRGB(150, 0, 0)
+    CloseButton.Text = "Ã—"
+    CloseButton.TextSize = 30.000
+    
+    CloseImage.Name = "CloseImage"
+    CloseImage.Parent = Points
+    CloseImage.AnchorPoint = Vector2.new(0.5, 0.5)
+    CloseImage.AutoButtonColor = false
+    CloseImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    CloseImage.BackgroundTransparency = 1.000
+    CloseImage.Size = UDim2.new(0, 0, 0, 0)
+    CloseImage.Position = UDim2.new(0, -370, 0, 170)
+CloseImage.Image = "rbxassetid://8666601749"
+    CloseImage.ImageColor3 = Color3.fromRGB(150, 30, 30)
+    
+    ServerTime.Name = "ServerTime"
+    ServerTime.Parent = WindowFrame
+    ServerTime.BackgroundColor3 = _G.WindowBackgroundColor
+    ServerTime.AutoButtonColor = false
+    ServerTime.BackgroundTransparency = 1.000
+    ServerTime.Position = UDim2.new(0, 260, 0, 17)
+    ServerTime.Size = UDim2.new(0, 225, 0, 25)
+    ServerTime.Font = Enum.Font.GothamSemibold
+    ServerTime.Text = ""
+    ServerTime.TextSize = 13.000
+    ServerTime.TextColor3 = Color3.fromRGB(0, 250, 0)
+    ServerTime.TextXAlignment = Enum.TextXAlignment.Center
